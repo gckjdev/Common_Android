@@ -22,8 +22,10 @@ public class HttpUtils {
 
 		try {
 			response = httpclient.execute(httpGet, strRespHandler);
-			Log.d(UtilConstants.LOG_TAG, "Get response: " + response);
+			Log.d(UtilConstants.LOG_TAG, "Get http response: " + response);
+			
 			jsonResponse = new JSONObject(response);
+			Log.d(UtilConstants.LOG_TAG, "Get Json response: " + jsonResponse);
 		} catch (Exception e) {
 			logException(e);
 		}

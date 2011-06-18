@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   
+   <style name="TextViewStyleTabMainNav">
+    <item name="android:textSize">12dip</item>
+    <item name="android:textColor">@drawable/main_tab_nav_text</item>
+   </style> 
+ 
+</resources>

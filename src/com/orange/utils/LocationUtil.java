@@ -10,13 +10,19 @@ public class LocationUtil {
 		LocationManager locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 		Log.d(UtilConstants.LOG_TAG, "Location providers: " + locationManager.getAllProviders());
 
-		// sometimes can not get location from emulator, check why!
+		// firstly try GPS, then try network provider
 		Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
 		if (location == null) {
 			location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
 		}
-		
-		Log.d(UtilConstants.LOG_TAG, "Get location: " + location);
+
+		// sometimes can not get location from emulator
+		if (location == null) {
+			location = new Location("dummy");
+			location.setLatitude(0);
+			location.setLongitude(0);
+		}
+		Log.d(UtilConstants.LOG_TAG, "Returning location: " + location);
 		
 		return location;
 	}

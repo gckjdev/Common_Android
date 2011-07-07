@@ -43,7 +43,6 @@ public abstract class TabsUtil {
 		TabsUtil.setTabIndicator(spec, title, host.getContext().getResources().getDrawable(drawable), view);
 		host.addTab(spec);
 	}
-
 	private static View prepareTabView(Context context, String text, int drawable) {
 		View view = LayoutInflater.from(context).inflate(R.layout.main_tab_nav, null);
 		TextView tv = (TextView) view.findViewById(R.id.tvTitle);

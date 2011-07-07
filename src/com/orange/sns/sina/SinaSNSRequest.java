@@ -27,6 +27,7 @@ public class SinaSNSRequest extends CommonSNSRequest {
     	return SINA_USER_INFO_URL;
     }
     
+	@Override
     public CommonSNSRequestHandler getUserInfoRequestHandler(){
     	return new SinaGetUserRequestHandler(this);
     }

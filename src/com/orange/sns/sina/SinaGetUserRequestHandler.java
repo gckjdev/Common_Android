@@ -1,5 +1,7 @@
 package com.orange.sns.sina;
 
+import java.util.Map;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,7 +15,7 @@ public class SinaGetUserRequestHandler extends CommonSNSRequestHandler {
 	}
 
 	@Override
-	public boolean addParameters() {
+	public boolean addParameters(Map<String, String> params) {
 		return true;
 	}
 

@@ -71,13 +71,13 @@ public abstract class CommonSNSRequestHandler {
 		}
 	}
 	
-	public JSONObject execute() {
+	public JSONObject execute(Map<String, String> params) {
 				
 		try {
 			if (buildCommonParameters() == false)
 				return null;
 			
-			if (addParameters() == false)
+			if (addParameters(params) == false)
 				return null;
 
 			if (signParameters() == false)
@@ -87,7 +87,7 @@ public abstract class CommonSNSRequestHandler {
 			if (this.getHttpMethod().equalsIgnoreCase(METHOD_GET)){
 				// send get request
 				String url = this.getURLByParameterList(paramList, getBaseURL());
-				this.sendHttpGetRequest(url);
+				response = this.sendHttpGetRequest(url);
 			}
 			else{
 				// send post request
@@ -132,9 +132,12 @@ public abstract class CommonSNSRequestHandler {
 		return (signature != null);
 	}
 	
-	abstract public boolean addParameters();
+	abstract public boolean addParameters(Map<String, String> params);
+	
 	abstract public String getBaseURL();
+	
 	abstract public String getHttpMethod();
+	
 	abstract public JSONObject parseResponse(String response) throws JSONException;		
 	
 	private String signParameter(List<OAuthParameter> paramList, String baseURL, String httpMethod, String oauthConsumerSecret, String oauthTokenSecret) throws UnsupportedEncodingException, GeneralSecurityException{
@@ -183,6 +186,14 @@ public abstract class CommonSNSRequestHandler {
 		// add signature into parameter list
 		paramList.add(new OAuthParameter("oauth_signature", signature));
 		return signature;
+	}
+	
+	protected boolean addParam(String name, String value){
+		if (name == null || value == null)
+			return false;
+		
+		paramList.add(new OAuthParameter(name, value));
+		return true;
 	}
 	
 	private List<OAuthParameter> buildCommonParameterList(CommonSNSRequest request){

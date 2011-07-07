@@ -54,4 +54,12 @@ public abstract class CommonSNSRequest {
 	}
     
     abstract public CommonSNSRequestHandler getUserInfoRequestHandler();
+	
+    public CommonSNSRequestHandler getAccessTokenRequestHandler(){
+		return new OAuthGetAccessTokenRequestHandler(this);
+	}
+    
+	public CommonSNSRequestHandler authorizeRequestHandler() {
+		return new OAuthGetRequestTokenRequestHandler(this);
+	}
 }

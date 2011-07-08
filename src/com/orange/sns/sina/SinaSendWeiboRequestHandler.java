@@ -17,7 +17,7 @@ public class SinaSendWeiboRequestHandler extends CommonSNSRequestHandler {
 
 	@Override
 	public boolean addParameters(Map<String, String> params) {
-		String text = params.get(SNSConstants.PP_WEIBO_TEXT);
+		String text = params.get(SNSConstants.SNS_WEIBO_TEXT);
 		if (text == null){
 			return false;
 		}
@@ -36,7 +36,7 @@ public class SinaSendWeiboRequestHandler extends CommonSNSRequestHandler {
 	}
 
 	@Override
-	public JSONObject parseResponse(String response) throws JSONException {
+	public JSONObject parseResponse(String response) throws JSONException {		
 		return parseJSONResponse(response);
 	}
 

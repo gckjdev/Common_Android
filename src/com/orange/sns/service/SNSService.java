@@ -73,7 +73,7 @@ public class SNSService {
 	public boolean sendWeibo(CommonSNSRequest snsRequest, String text) {
 		CommonSNSRequestHandler handler = snsRequest.getSendWeiboRequestHandler();
 		Map<String, String> params = new HashMap<String, String>();
-		params.put(SNSConstants.PP_WEIBO_TEXT, text);
+		params.put(SNSConstants.SNS_WEIBO_TEXT, text);
 		JSONObject result = handler.execute(params);
 		if (result != null){
 			Log.d(LOG_TAG, "<sendWeibo> success");

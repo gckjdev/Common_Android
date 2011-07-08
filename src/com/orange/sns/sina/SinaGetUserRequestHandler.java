@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import com.orange.sns.common.CommonSNSRequest;
 import com.orange.sns.common.CommonSNSRequestHandler;
+import com.orange.sns.common.SNSConstants;
 
 public class SinaGetUserRequestHandler extends CommonSNSRequestHandler {
 
@@ -31,7 +32,23 @@ public class SinaGetUserRequestHandler extends CommonSNSRequestHandler {
 
 	@Override
 	public JSONObject parseResponse(String response) throws JSONException {
-		return this.parseJSONResponse(response);
+		JSONObject resultJSON = parseJSONResponse(response);
+		if (resultJSON == null)
+			return null;
+		
+		JSONObject userJSON = new JSONObject();		
+		userJSON.put(SNSConstants.SNS_NETWORK, SNSConstants.SNS_SINA_WEIBO);
+		
+	    safeSetKeyValue(resultJSON, userJSON, "id", SNSConstants.SNS_USER_ID);    
+	    safeSetKeyValue(resultJSON, userJSON, "screen_name", SNSConstants.SNS_NICK_NAME);
+	    safeSetKeyValue(resultJSON, userJSON, "domain", SNSConstants.SNS_DOMAIN);
+	    safeSetKeyValue(resultJSON, userJSON, "gender", SNSConstants.SNS_GENDER);
+	    safeSetKeyValue(resultJSON, userJSON, "province", SNSConstants.SNS_PROVINCE);
+	    safeSetKeyValue(resultJSON, userJSON, "city", SNSConstants.SNS_CITY);
+	    safeSetKeyValue(resultJSON, userJSON, "location", SNSConstants.SNS_LOCATION);
+	    safeSetKeyValue(resultJSON, userJSON, "profile_image_url", SNSConstants.SNS_USER_IMAGE_URL);
+				
+		return userJSON;
 	}
 
 }

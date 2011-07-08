@@ -322,5 +322,19 @@ public abstract class CommonSNSRequestHandler {
 		JSONObject json = new JSONObject(response);
 		return json;
 	}
+	
+	protected void safeSetKeyValue(JSONObject fromObj, JSONObject toObj, String fromKey, String toKey){
+		if (!fromObj.has(fromKey))
+			return;
+		
+		try {
+			String value = fromObj.getString(fromKey);
+			if (value == null)
+				return;
+			toObj.put(toKey, value);
+		} catch (JSONException e) {
+			// do nothing
+		}
+	}
 
 }

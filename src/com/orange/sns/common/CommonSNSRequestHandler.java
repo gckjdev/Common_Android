@@ -37,8 +37,8 @@ public abstract class CommonSNSRequestHandler {
 
 	private final static String LOG_TAG = "SNSRequest";
 	
-	CommonSNSRequest		request;
-	List<OAuthParameter>	paramList = new ArrayList<OAuthParameter>();
+	protected CommonSNSRequest		request;
+	private   List<OAuthParameter>	paramList = new ArrayList<OAuthParameter>();
 	
 	public CommonSNSRequestHandler(CommonSNSRequest req){
 		this.request = req;
@@ -77,8 +77,10 @@ public abstract class CommonSNSRequestHandler {
 			if (buildCommonParameters() == false)
 				return null;
 			
-			if (addParameters(params) == false)
-				return null;
+			if (params != null){			
+				if (addParameters(params) == false)
+					return null;
+			}
 
 			if (signParameters() == false)
 				return null;
@@ -98,15 +100,15 @@ public abstract class CommonSNSRequestHandler {
 			return parseResponse(response);
 			
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			Log.e(LOG_TAG, "<execute> catch UnsupportedEncodingException="+e.toString());
 		} catch (GeneralSecurityException e) {
-			e.printStackTrace();
+			Log.e(LOG_TAG, "<execute> catch GeneralSecurityException="+e.toString());
 		} catch (ParseException e) {
-			e.printStackTrace();
+			Log.e(LOG_TAG, "<execute> catch ParseException="+e.toString());
 		} catch (IOException e) {
-			e.printStackTrace();
+			Log.e(LOG_TAG, "<execute> catch IOException="+e.toString());
 		} catch (JSONException e) {
-			e.printStackTrace();
+			Log.e(LOG_TAG, "<execute> catch JSONException="+e.toString());
 		}
 		
 		return null;
@@ -199,7 +201,7 @@ public abstract class CommonSNSRequestHandler {
 	private List<OAuthParameter> buildCommonParameterList(CommonSNSRequest request){
 		List<OAuthParameter> paramList = new ArrayList<OAuthParameter>();
 		paramList.add(new OAuthParameter("oauth_consumer_key", request.getAppKey()));
-		paramList.add(new OAuthParameter("oauth_nonce", UUID.randomUUID().toString()));
+		paramList.add(new OAuthParameter("oauth_nonce", UUID.randomUUID().toString().replaceAll("-", "")));
 		paramList.add(new OAuthParameter("oauth_signature_method", "HMAC-SHA1"));
 		paramList.add(new OAuthParameter("oauth_timestamp", String.valueOf(System.currentTimeMillis()/1000)));
 		paramList.add(new OAuthParameter("oauth_version", "1.0"));

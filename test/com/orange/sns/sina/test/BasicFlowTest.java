@@ -21,16 +21,6 @@ public class BasicFlowTest {
 		SinaSNSRequest sinaRequest = new SinaSNSRequest();
 		sinaRequest.setAppKey("637805385");
 		sinaRequest.setAppSecret("9391125674c00f84022a4ab191f5a392");
-//		sinaRequest.setCallbackURL("");
-//		sinaRequest.setOauthToken("");
-//		sinaRequest.setOauthTokenSecret("");
-		try {
-			service.startAuthorization(sinaRequest);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		} catch (GeneralSecurityException e) {
-			e.printStackTrace();
-		}
 		
 	}
 

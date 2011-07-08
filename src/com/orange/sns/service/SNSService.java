@@ -1,48 +1,17 @@
 package com.orange.sns.service;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.security.GeneralSecurityException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.ParseException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.CoreProtocolPNames;
-import org.apache.http.protocol.HTTP;
-import org.apache.http.util.EntityUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.util.Log;
-
-import com.orange.utils.codec.Base64;
-import com.orange.utils.codec.HMAC_SHA1;
-
 
 import com.orange.sns.common.CommonSNSRequest;
 import com.orange.sns.common.CommonSNSRequestHandler;
 import com.orange.sns.common.SNSConstants;
-import com.orange.sns.sina.SinaSNSRequest;
+
 
 public class SNSService {
 	
@@ -52,7 +21,11 @@ public class SNSService {
 		
 		try {
 			CommonSNSRequestHandler handler = snsRequest.authorizeRequestHandler();
-			JSONObject result = handler.execute(null);			
+			Map<String, String> params = new HashMap<String, String>();
+			if (snsRequest.getCallbackURL() != null){
+				params.put(SNSConstants.OAUTH_CALLBACK_URL, snsRequest.getCallbackURL());
+			}
+			JSONObject result = handler.execute(params);			
 			if (result != null){
 				snsRequest.setOauthToken(result.getString(SNSConstants.OAUTH_TOKEN));
 				snsRequest.setOauthTokenSecret(result.getString(SNSConstants.OAUTH_TOKEN_SECRET));
@@ -98,8 +71,14 @@ public class SNSService {
 	}
 
 	public boolean sendWeibo(CommonSNSRequest snsRequest, String text) {
-		
-		return false;
+		CommonSNSRequestHandler handler = snsRequest.getSendWeiboRequestHandler();
+		Map<String, String> params = new HashMap<String, String>();
+		params.put(SNSConstants.PP_WEIBO_TEXT, text);
+		JSONObject result = handler.execute(params);
+		if (result != null){
+			Log.d(LOG_TAG, "<sendWeibo> success");
+		}
+		return (result != null);
 		
 	}	
 	
@@ -108,6 +87,10 @@ public class SNSService {
 		CommonSNSRequestHandler handler = snsRequest.getUserInfoRequestHandler();
 		JSONObject result = handler.execute(null);		
 		return result;		
+	}
+
+	public String getAuthorizeURL(CommonSNSRequest snsRequest) {		
+		return snsRequest.getAuthorizeBaseURL().concat("?oauth_token=").concat(snsRequest.getOauthToken());
 	}
 
 }

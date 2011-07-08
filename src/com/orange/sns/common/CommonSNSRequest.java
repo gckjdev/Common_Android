@@ -54,6 +54,7 @@ public abstract class CommonSNSRequest {
 	}
     
     abstract public CommonSNSRequestHandler getUserInfoRequestHandler();
+    abstract public CommonSNSRequestHandler getSendWeiboRequestHandler();
 	
     public CommonSNSRequestHandler getAccessTokenRequestHandler(){
 		return new OAuthGetAccessTokenRequestHandler(this);
@@ -61,5 +62,5 @@ public abstract class CommonSNSRequest {
     
 	public CommonSNSRequestHandler authorizeRequestHandler() {
 		return new OAuthGetRequestTokenRequestHandler(this);
-	}
+	}	
 }

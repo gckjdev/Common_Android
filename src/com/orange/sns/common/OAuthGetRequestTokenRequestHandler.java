@@ -13,6 +13,12 @@ public class OAuthGetRequestTokenRequestHandler extends CommonSNSRequestHandler 
 
 	@Override
 	public boolean addParameters(Map<String, String> params) {
+		
+		String oauthCallBack = params.get(SNSConstants.OAUTH_CALLBACK_URL);
+		if (oauthCallBack != null){
+			addParam(SNSConstants.OAUTH_CALLBACK_URL, oauthCallBack);
+		}
+		
 		return true;
 	}
 

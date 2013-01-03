@@ -29,13 +29,13 @@ public class JsonUtil {
 		}
 	}
 	
-	public static Object get(JSONObject json, String key) {
+	public static JSONObject get(JSONObject json, String key) {
 		try {
 			if (json == null || json.isNull(key)) {
 				return null;
 			}
 
-			return json.get(key);
+			return json.getJSONObject(key);
 		} catch (JSONException e) {
 			return null;
 		}

@@ -16,6 +16,12 @@ public class PPActivity extends Activity {
 		progressDialog = ProgressDialog.show(this, title, message);
 	}
 	
+	public void showProgressDialog(int messageId){
+		Resources res = getResources();
+		String message = res.getString(messageId);
+		showProgressDialog("", message);
+	}
+
 	public void showProgressDialog(int titleId, int messageId){
 		Resources res = getResources();
 		String title = res.getString(titleId);

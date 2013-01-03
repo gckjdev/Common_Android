@@ -1,19 +1,24 @@
 package com.orange.common.android.activity;
 
+
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.DialogInterface.OnKeyListener;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.view.KeyEvent;
 
 
-public class PPActivity extends Activity {
+public class PPActivity extends FragmentActivity {
 
 	ProgressDialog progressDialog;
-	
 	private void showProgressDialog(String title, String message){
 		progressDialog = ProgressDialog.show(this, title, message);
+		progressDialog.setCancelable(true);
 	}
 	
 	public void showProgressDialog(int titleId, int messageId){

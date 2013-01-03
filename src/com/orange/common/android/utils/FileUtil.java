@@ -1,6 +1,7 @@
 package com.orange.common.android.utils;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -64,4 +65,34 @@ public class FileUtil {
 	public static void logException(String filename, Exception e) {
 		Log.e(UtilConstants.LOG_TAG, "File operation failed, file name: " + filename, e);
 	}
+	
+	/**
+	 * @param path
+	 * @description
+	 * @version 1.0
+	 * @author liuxiaokun
+	 */
+	public static long getFileSize(String path)
+	{
+		// TODO Auto-generated method stub
+		File file = new File(path);
+		if (file.exists())
+		{
+			return file.length();
+		} else
+		{
+			return 0;
+		}
+	}
+	
+	 public static boolean moveFile(String srcFile, String destPath) {
+	        // File (or directory) to be moved
+	        File file = new File(srcFile);
+	        // Destination directory
+	        File dir = new File(destPath);
+	        // Move file to new directory
+	       boolean moveFlag = file.renameTo(new File(dir, file.getName()));
+	        //boolean moveFlag = file.renameTo(new File(destPath));
+	        return moveFlag;
+	    }	
 }

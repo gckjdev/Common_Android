@@ -20,9 +20,11 @@ public class DateUtil
 	public static String dateFormatToString(int date){
 		String dateString = "";
 		long currentTime = System.currentTimeMillis()/1000;
-		Log.d(TAG, "current time = "+currentTime);
-		Log.d(TAG, "draw date = "+date);
 		date = (int)currentTime-date;
+		if (date == 0)
+		{
+			return dateString;
+		}
 		if(date/60>60){
 			dateString = date/3600+"小时前";
 		}else {

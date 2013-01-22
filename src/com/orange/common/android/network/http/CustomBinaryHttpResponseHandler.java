@@ -167,12 +167,12 @@ public class CustomBinaryHttpResponseHandler extends AsyncHttpResponseHandler {
         StatusLine status = response.getStatusLine();
         Header[] contentTypeHeaders = response.getHeaders("Content-Type");
         byte[] responseBody = null;
-        if(contentTypeHeaders.length != 1) {
-            //malformed/ambiguous HTTP Header, ABORT!
-            sendFailureMessage(new HttpResponseException(status.getStatusCode(), "None, or more than one, Content-Type Header found!"), responseBody);
-            return;
-        }
-        Header contentTypeHeader = contentTypeHeaders[0];
+//        if(contentTypeHeaders.length != 1) {
+//            //malformed/ambiguous HTTP Header, ABORT!
+//            sendFailureMessage(new HttpResponseException(status.getStatusCode(), "None, or more than one, Content-Type Header found!"), responseBody);
+//            return;
+//        }
+//        Header contentTypeHeader = contentTypeHeaders[0];
         
         
 //        boolean foundAllowedContentType = false;
@@ -181,12 +181,12 @@ public class CustomBinaryHttpResponseHandler extends AsyncHttpResponseHandler {
 //                foundAllowedContentType = true;
 //            }
 //        }
-        boolean foundAllowedContentType = true;	// disable this feature
-        if(!foundAllowedContentType) {
-            //Content-Type not in allowed list, ABORT!
-            sendFailureMessage(new HttpResponseException(status.getStatusCode(), "Content-Type not allowed!"), responseBody);
-            return;
-        }
+//        boolean foundAllowedContentType = true;	// disable this feature
+//        if(!foundAllowedContentType) {
+//            //Content-Type not in allowed list, ABORT!
+//            sendFailureMessage(new HttpResponseException(status.getStatusCode(), "Content-Type not allowed!"), responseBody);
+//            return;
+//        }
         try {
 
         	HttpEntity entity = null;
@@ -223,6 +223,9 @@ public class CustomBinaryHttpResponseHandler extends AsyncHttpResponseHandler {
         	
         } catch(IOException e) {
             sendFailureMessage(e, (byte[]) null);
+        }
+        catch (Exception e){
+        	sendFailureMessage(e, (byte[]) null);
         }
 
         if(status.getStatusCode() >= 300) {

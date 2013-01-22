@@ -18,6 +18,18 @@ public class JsonUtil {
 		}
 	}
 	
+	public static String getString(JSONObject json, String key, String defaultValue) {
+		try {
+			if (json == null || json.isNull(key)) {
+				return defaultValue;
+			}
+
+			return json.getString(key);
+		} catch (JSONException e) {
+			return defaultValue;
+		}
+	}
+	
 	public static int getInt(JSONObject json, String key) {
 		try {
 			if (json == null || json.isNull(key)) {

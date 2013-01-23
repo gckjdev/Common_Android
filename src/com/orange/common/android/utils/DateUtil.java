@@ -8,6 +8,10 @@
  */
 package com.orange.common.android.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.TimeZone;
+
 import android.util.Log;
 
 
@@ -20,16 +24,30 @@ public class DateUtil
 	public static String dateFormatToString(int date){
 		String dateString = "";
 		long currentTime = System.currentTimeMillis()/1000;
-		date = (int)currentTime-date;
+		int dateTime = (int)(currentTime-date)/60;
 		if (date == 0)
 		{
 			return dateString;
 		}
-		if(date/60>60){
-			dateString = date/3600+"小时前";
+		if(dateTime>1440){
+			dateString = getDateString(date);
+		}else if (dateTime>60&&dateTime<1440) {
+			dateString = dateTime/60+"小时前";
 		}else {
-			dateString = (date/60<1?1:date/60) +"分钟前";
+			dateString = (dateTime/60<1?1:dateTime/60) +"分钟前";
 		}
+		return dateString;
+	}
+	
+	
+	public static String getDateString(long time) {
+		Calendar date = Calendar.getInstance();
+		time = time*1000;
+		//long targetTime = time - TimeZone.getDefault().getRawOffset();
+		date.setTimeInMillis(time);
+		
+		SimpleDateFormat dateformat=new SimpleDateFormat("yy-MM-dd HH:mm");
+		String dateString =dateformat.format(date.getTime());
 		return dateString;
 	}
 }

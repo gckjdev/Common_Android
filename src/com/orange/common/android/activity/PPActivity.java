@@ -68,4 +68,14 @@ public class PPActivity extends FragmentActivity {
 			savePhotoTaken(data);
 		}
 	}
+
+	@Override
+	protected void onDestroy()
+	{
+		super.onDestroy();
+		if (progressDialog != null)
+		{
+			progressDialog.dismiss();
+		}
+	}
 }

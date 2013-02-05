@@ -18,7 +18,9 @@ public class PPActivity extends FragmentActivity {
 	ProgressDialog progressDialog;
 	private void showProgressDialog(String title, String message){
 		progressDialog = ProgressDialog.show(this, title, message);
-		progressDialog.setCancelable(true);
+		//progressDialog.setCancelable(true);
+		//progressDialog.setIndeterminate(true);
+		progressDialog.setOnKeyListener(keyListener);
 	}
 	
 	public void showProgressDialog(int messageId){
@@ -27,14 +29,14 @@ public class PPActivity extends FragmentActivity {
 		showProgressDialog("", message);
 	}
 
-	public void showProgressDialog(int titleId, int messageId){
+	public  void showProgressDialog(int titleId, int messageId){
 		Resources res = getResources();
 		String title = res.getString(titleId);
 		String message = res.getString(messageId);
 		showProgressDialog(title, message);
 	}
 	
-	public void hideDialog(){
+	public  void hideDialog(){
 		if (progressDialog != null){
 			progressDialog.dismiss();
 		}
@@ -78,4 +80,17 @@ public class PPActivity extends FragmentActivity {
 			progressDialog.dismiss();
 		}
 	}
+	
+	private OnKeyListener keyListener =  new OnKeyListener()
+	{
+		
+		@Override
+		public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event)
+		{
+			if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+				finish();
+			} 
+			return false;
+		}
+	};
 }

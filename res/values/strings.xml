@@ -2,4 +2,7 @@
 <resources>
     <string name="hello">Hello World!</string>
     <string name="app_name">Common_Android</string>
+    <string name="hour_before">小时前</string>
+    <string name="day_before">天前</string>
+    <string name="minute_before">分钟前</string>
 </resources>

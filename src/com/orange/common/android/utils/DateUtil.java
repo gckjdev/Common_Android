@@ -12,6 +12,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TimeZone;
 
+import com.orange.R;
+
+import android.content.Context;
 import android.util.Log;
 
 
@@ -21,7 +24,7 @@ public class DateUtil
 
 	private static final String TAG = "DateUtil";
 
-	public static String dateFormatToString(int date){
+	public static String dateFormatToString(int date,Context context){
 		String dateString = "";
 		long currentTime = System.currentTimeMillis()/1000;
 		int dateTime = (int)(currentTime-date)/60;
@@ -29,12 +32,15 @@ public class DateUtil
 		{
 			return dateString;
 		}
-		if(dateTime>1440){
+		if(dateTime>4320){
 			dateString = getDateString(date);
+		}
+		else if(dateTime>1440&&dateTime<4320){
+			dateString = dateTime/1440+context.getString(R.string.day_before);
 		}else if (dateTime>60&&dateTime<1440) {
-			dateString = dateTime/60+"小时前";
+			dateString = dateTime/60+context.getString(R.string.hour_before);
 		}else {
-			dateString = (dateTime/60<1?1:dateTime/60) +"分钟前";
+			dateString = (dateTime/60<1?1:dateTime/60) +context.getString(R.string.minute_before);
 		}
 		return dateString;
 	}
@@ -46,8 +52,10 @@ public class DateUtil
 		//long targetTime = time - TimeZone.getDefault().getRawOffset();
 		date.setTimeInMillis(time);
 		
-		SimpleDateFormat dateformat=new SimpleDateFormat("yy-MM-dd HH:mm");
+		SimpleDateFormat dateformat=new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		String dateString =dateformat.format(date.getTime());
 		return dateString;
 	}
+	
+	
 }

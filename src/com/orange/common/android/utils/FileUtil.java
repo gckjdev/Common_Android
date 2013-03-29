@@ -3,11 +3,13 @@ package com.orange.common.android.utils;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.Log;
 
 public class FileUtil {
@@ -94,5 +96,40 @@ public class FileUtil {
 	       boolean moveFlag = file.renameTo(new File(dir, file.getName()));
 	        //boolean moveFlag = file.renameTo(new File(destPath));
 	        return moveFlag;
-	    }	
+	}
+	 
+	
+	public static void saveBitmapInFile(String filePath,String fileName,Bitmap bitmap)
+	{
+		File cacheFolder = new File(filePath);
+		if (!cacheFolder.exists())
+		{
+			cacheFolder.mkdirs();
+		}
+		FileOutputStream fouts = null;
+		try
+		{
+			File cacheFile = new File(filePath, fileName);
+			cacheFile.createNewFile();
+			fouts = new FileOutputStream(cacheFile);
+			bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fouts);
+			fouts.flush();
+			fouts.close();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	} 
+	
+	public static boolean deleteFile(String filePath)
+	{
+		boolean flag = false;
+		File file = new File(filePath);
+		if (file.isFile() && file.exists())
+		{
+			file.delete();
+			flag = true;
+		}
+		return flag;
+	}
 }

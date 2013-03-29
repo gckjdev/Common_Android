@@ -43,7 +43,7 @@ public class ToastUtil {
    } 
    
    
-   public static void makeToast(final Context context,final View view){
+   public static void makeViewToast(final Context context,final View view){
 	   handler.post(new Runnable() {  
            @Override  
            public void run() {  

@@ -33,7 +33,6 @@ public class SinaWeiboHandler
 {
 	public static final String TAG = "SinaWeiboHandler";
 	private Activity activity;
-	private Intent intent;
 	private Oauth2AccessToken accessToken;
 	private SsoHandler ssoHandler;
 	
@@ -48,11 +47,10 @@ public class SinaWeiboHandler
 	{
 		super();
 		this.activity = activity;
-		this.intent = intent;
 	}
 	
 	
-	public void getAccessToken(String appKey,String redirectUrl)
+	public Oauth2AccessToken getAccessToken(String appKey,String redirectUrl)
 	{
 		accessToken=OauthTokenKeeper.getSinaToken(activity);
 		if (!accessToken.isSessionValid()){
@@ -65,10 +63,8 @@ public class SinaWeiboHandler
 	            Log.i(TAG, "<com.weibo.sdk.android.sso.SsoHandler> not found and use oauth2.0");
 	            sinaWeibo.authorize(activity, new AuthDialogListener());
 	        }
-		}else{
-			startIntent();
 		}
-		
+		return accessToken;
 	}
 
 
@@ -81,13 +77,7 @@ public class SinaWeiboHandler
 		
 	}
 	
-	public void startIntent()
-	{
-		if (intent != null)
-		{
-			activity.startActivity(intent);
-		}
-	}
+	
 
 	class AuthDialogListener implements WeiboAuthListener {
 			@Override
@@ -97,7 +87,6 @@ public class SinaWeiboHandler
 	            accessToken = new Oauth2AccessToken(token, expires_in);
 	            if (accessToken.isSessionValid()) {
 	                OauthTokenKeeper.saveSinaToken(activity,accessToken);
-	                startIntent();
 	            }
 	        }
 

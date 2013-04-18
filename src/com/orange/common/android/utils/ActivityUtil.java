@@ -1,8 +1,12 @@
 package com.orange.common.android.utils;
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -43,5 +47,11 @@ public class ActivityUtil {
 		showAlert(activity, "", res.getString(messageStringId));		
 	}
 
+	
+	public static void sendMessage(Context context,String message){
+		Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"));
+		intent.putExtra("sms_body", message);
+        context.startActivity(intent);
+	}
 	
 }

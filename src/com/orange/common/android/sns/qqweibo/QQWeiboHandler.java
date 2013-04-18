@@ -25,24 +25,21 @@ import com.tencent.weibo.webview.OAuthV2AuthorizeWebView;
 public class QQWeiboHandler
 {
 	private Activity activity;
-	private Intent intent;
 	private OAuthV2 oAuth;
 	public static final int REQUEST_CODE = 1;
-	public QQWeiboHandler(Activity activity,Intent intent)
+	private QQOauth2AccessToken oauth2AccessToken;
+	public QQWeiboHandler(Activity activity)
 	{
 		super();
 		this.activity = activity;
-		this.intent = intent;
 	}
 	
 	
-	public void getOauthToken(String appKey, String appSecret,String redirectUri)
+	public QQOauth2AccessToken getOauthToken(String appKey, String appSecret,String redirectUri)
 	{
-		QQOauth2AccessToken token = OauthTokenKeeper.getQQToken(activity);
-		if (token.isSessionValid())
+		oauth2AccessToken = OauthTokenKeeper.getQQToken(activity);
+		if (!oauth2AccessToken.isSessionValid())
 		{
-			activity.startActivity(intent);
-		}else{
 			oAuth = new OAuthV2(redirectUri);
 			oAuth.setClientId(appKey);
 			oAuth.setClientSecret(appSecret);
@@ -51,7 +48,7 @@ public class QQWeiboHandler
 			activity.startActivityForResult(intent, REQUEST_CODE);
 		}
 			
-		
+		return oauth2AccessToken;
 	}
 	
 	
@@ -60,10 +57,18 @@ public class QQWeiboHandler
 		if (requestCode==REQUEST_CODE) {  
 		     if (resultCode==OAuthV2AuthorizeWebView.RESULT_CODE) {
 		         oAuth=(OAuthV2) data.getExtras().getSerializable("oauth");
-		         QQOauth2AccessToken token = new QQOauth2AccessToken(oAuth);
-		         OauthTokenKeeper.saveQQToken(activity, token);
-		         activity.startActivity(intent);
+		         oauth2AccessToken = new QQOauth2AccessToken(oAuth);
+		         OauthTokenKeeper.saveQQToken(activity, oauth2AccessToken);
 		     }
 		 }
 	}
+
+
+	public static int getRequestCode()
+	{
+		return REQUEST_CODE;
+	}
+
+
+	
 }

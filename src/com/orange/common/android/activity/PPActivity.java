@@ -16,11 +16,14 @@ import android.view.KeyEvent;
 public class PPActivity extends FragmentActivity {
 
 	ProgressDialog progressDialog;
+	OnKeyListener onKeyListener;
 	private void showProgressDialog(String title, String message){
+		
 		progressDialog = ProgressDialog.show(this, title, message);
-		//progressDialog.setCancelable(true);
+		progressDialog.setCancelable(true);
 		//progressDialog.setIndeterminate(true);
-		progressDialog.setOnKeyListener(keyListener);
+		if(onKeyListener != null)
+			progressDialog.setOnKeyListener(onKeyListener);
 	}
 	
 	public void showProgressDialog(int messageId){
@@ -34,6 +37,10 @@ public class PPActivity extends FragmentActivity {
 		String title = res.getString(titleId);
 		String message = res.getString(messageId);
 		showProgressDialog(title, message);
+	}
+	
+	public void setProgressDialogOnKey(OnKeyListener onKeyListener){
+		this.onKeyListener = onKeyListener;
 	}
 	
 	public  void hideDialog(){
@@ -81,16 +88,5 @@ public class PPActivity extends FragmentActivity {
 		}
 	}
 	
-	private OnKeyListener keyListener =  new OnKeyListener()
-	{
-		
-		@Override
-		public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event)
-		{
-			if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
-				finish();
-			} 
-			return false;
-		}
-	};
+	
 }

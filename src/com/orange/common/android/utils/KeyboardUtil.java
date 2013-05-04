@@ -32,7 +32,7 @@ public class KeyboardUtil {
 		imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
 	}
 	
-	public static void showSoftKeyboard(View view,Context context){
+	/*public static void showSoftKeyboard(View view,Context context){
 		InputMethodManager inputMgr = (InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMgr.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
         inputMgr.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
@@ -42,7 +42,7 @@ public class KeyboardUtil {
 		InputMethodManager mgr = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
 		mgr.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 		mgr.hideSoftInputFromWindow(view.getWindowToken(), 0);
-	}
+	}*/
 }
 
 

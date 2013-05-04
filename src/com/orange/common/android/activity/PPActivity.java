@@ -26,6 +26,13 @@ public class PPActivity extends FragmentActivity {
 			progressDialog.setOnKeyListener(onKeyListener);
 	}
 	
+	
+	public boolean isProgressDialogShowing()
+	{
+		return progressDialog.isShowing();
+	}
+	
+	
 	public void showProgressDialog(int messageId){
 		Resources res = getResources();
 		String message = res.getString(messageId);

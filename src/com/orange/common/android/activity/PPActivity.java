@@ -15,8 +15,8 @@ import android.view.KeyEvent;
 
 public class PPActivity extends FragmentActivity {
 
-	ProgressDialog progressDialog;
-	OnKeyListener onKeyListener;
+	private ProgressDialog progressDialog = null;
+	private OnKeyListener onKeyListener = null;
 	private void showProgressDialog(String title, String message){
 		
 		progressDialog = ProgressDialog.show(this, title, message);
@@ -29,7 +29,10 @@ public class PPActivity extends FragmentActivity {
 	
 	public boolean isProgressDialogShowing()
 	{
-		return progressDialog.isShowing();
+		if (progressDialog != null)		
+			return progressDialog.isShowing();
+		return false;
+		
 	}
 	
 	

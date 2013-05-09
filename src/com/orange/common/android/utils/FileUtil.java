@@ -14,6 +14,8 @@ import java.io.OutputStream;
 
 
 
+
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
@@ -23,6 +25,12 @@ public class FileUtil {
 	private static int len = 0;
 	private static byte[] buffer = new byte[1024];
 
+	
+	public static String getSDCardCachePath(Context context,String appName){
+		return FileUtil.getSDPath()+"/"+appName+"/cache/";
+	}
+	
+	
 	public static void saveFileAsString(Context context, String filename, String content) {
 		saveFileAsByte(context, filename, content.getBytes());
 	}

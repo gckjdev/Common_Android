@@ -2,7 +2,6 @@ package com.orange.common.android.sns.db;
 
 import com.orange.common.android.sns.qqweibo.QQOauth2AccessToken;
 import com.tencent.weibo.oauthv2.OAuthV2;
-import com.weibo.sdk.android.Oauth2AccessToken;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,7 +10,7 @@ import android.util.Log;
 
 
 public class OauthTokenKeeper {
-	private static final String PREFERENCES_NAME = "weibo_oauth_token";
+	/*private static final String PREFERENCES_NAME = "weibo_oauth_token";
 	public static final String SINA_OAUTH_TOKEN = "sina_token";
 	public static final String SINA_OAUTH_EXPIRES_TIME = "sina_expires_time";
 	public static final String QQ_OAUTH_TOKEN = "qq_token";
@@ -67,5 +66,5 @@ public class OauthTokenKeeper {
 		token.setAppSecret(pref.getString(QQ_OAUTH_APP_SECRET,""));
 		token.setOpenId(pref.getString(QQ_OAUTH_OPEN_ID, ""));
 		return token;
-	}
+	}*/
 }

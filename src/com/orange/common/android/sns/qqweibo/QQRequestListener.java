@@ -8,7 +8,6 @@
  */
 package com.orange.common.android.sns.qqweibo;
 
-import com.weibo.sdk.android.WeiboException;
 
 /**  
  * @description   

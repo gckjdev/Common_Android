@@ -154,7 +154,13 @@ public class CustomBinaryHttpResponseHandler extends AsyncHttpResponseHandler {
                 break;
             case FAILURE_MESSAGE:
                 response = (Object[])msg.obj;
-                handleFailureMessage((Throwable)response[0], (byte[])response[1]);
+                if ((response[1]).getClass().getName().equals("java.lang.String"))
+				{
+                	handleFailureMessage((Throwable)response[0], (String)response[1]);
+				}else {
+					handleFailureMessage((Throwable)response[0], (byte[])response[1]);
+				}
+                
                 break;
             default:
                 super.handleMessage(msg);

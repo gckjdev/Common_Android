@@ -26,7 +26,8 @@ public class QQWeiboSendWeiboRequestHandler extends CommonSNSRequestHandler {
 
 	@Override
 	public String getBaseURL() {
-		return QQWeiboSNSRequest.QQ_CREATE_WEIBO_URL;
+		//return QQWeiboSNSRequest.QQ_CREATE_WEIBO_URL;
+		return "";
 	}
 
 	@Override

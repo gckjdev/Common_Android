@@ -83,12 +83,7 @@ public class FileUtil {
 		Log.e(UtilConstants.LOG_TAG, "File operation failed, file name: " + filename, e);
 	}
 	
-	/**
-	 * @param path
-	 * @description
-	 * @version 1.0
-	 * @author liuxiaokun
-	 */
+	
 	public static long getFileSize(String path)
 	{
 		// TODO Auto-generated method stub
@@ -136,6 +131,69 @@ public class FileUtil {
 			e.printStackTrace();
 		}
 	} 
+	
+	
+	public static boolean saveFileInSDCard(String fileName,String filePath,InputStream inputStream){
+		Log.d(TAG, "<saveFileInSDCard> and filepath = "+filePath);
+		if (!checkFileIsExits(filePath))
+		{
+			creatDir(filePath);
+		}
+		String tragetFilePath = filePath+fileName;
+		return writeFile(tragetFilePath, inputStream);
+	}
+	
+	
+	
+	public static boolean writeFile(String targetFile, InputStream inputStream)
+	{
+		boolean flag = true;
+
+		try
+		{
+			File file = new File(targetFile);
+			OutputStream myOutput = new FileOutputStream(file);
+			BufferedInputStream myInput = new BufferedInputStream(inputStream);
+			byte[] buffer = new byte[1024];
+			int length;
+			while ((length = inputStream.read(buffer)) != -1)
+			{
+				myOutput.write(buffer, 0, length);
+				Log.d(TAG, "file length = " + length);
+			}
+			myOutput.flush();
+			myInput.close();
+			myOutput.close();
+		} catch (Exception e)
+		{
+			Log.e(TAG, "<writeFile> but catch exception :" + e.toString(), e);
+		}
+
+		return flag;
+	}
+	
+	
+	
+	public static FileInputStream readFile(String filePath){
+			
+		if (!checkFileIsExits(filePath))
+		{
+			Log.e(TAG, "<readFile> but file not found filePath = "+filePath);
+			return null;
+		}
+		File file = new File(filePath);	
+		FileInputStream fileInputStream = null;
+		try
+		{
+			fileInputStream = new FileInputStream(file);
+		} catch (FileNotFoundException e)
+		{
+			e.printStackTrace();
+			Log.e(TAG, "<readFile> but file not found filePath = "+filePath);
+		}
+		return fileInputStream;
+	}
+	
 	
 	public static boolean deleteFile(String filePath)
 	{

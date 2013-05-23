@@ -24,7 +24,7 @@ import com.tencent.weibo.webview.OAuthV2AuthorizeWebView;
 
 public class QQWeiboHandler
 {
-	private Activity activity;
+	/*private Activity activity;
 	private OAuthV2 oAuth;
 	public static final int REQUEST_CODE = 1;
 	private QQOauth2AccessToken oauth2AccessToken;
@@ -68,7 +68,7 @@ public class QQWeiboHandler
 	{
 		return REQUEST_CODE;
 	}
-
+*/
 
 	
 }

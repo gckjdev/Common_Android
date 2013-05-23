@@ -23,19 +23,12 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.orange.common.android.utils.JsonUtil;
-import com.weibo.sdk.android.Oauth2AccessToken;
-import com.weibo.sdk.android.WeiboException;
-import com.weibo.sdk.android.api.AccountAPI;
-import com.weibo.sdk.android.api.FriendshipsAPI;
-import com.weibo.sdk.android.api.StatusesAPI;
-import com.weibo.sdk.android.api.UsersAPI;
-import com.weibo.sdk.android.net.RequestListener;
 
 
 
 public class SinaWeiboApi 
 {
-	private static final String TAG = "SinaWeiboApi";
+	/*private static final String TAG = "SinaWeiboApi";
 	private Activity activity;
 	private Oauth2AccessToken accessToken;
 	private String appKey;
@@ -162,7 +155,7 @@ public class SinaWeiboApi
 		}
 		
 		
-	}
+	}*/
 	
 	
 	

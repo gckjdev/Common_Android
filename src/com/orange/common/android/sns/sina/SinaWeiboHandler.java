@@ -11,12 +11,7 @@ package com.orange.common.android.sns.sina;
 import java.text.SimpleDateFormat;
 
 import com.orange.common.android.sns.db.OauthTokenKeeper;
-import com.weibo.sdk.android.Oauth2AccessToken;
-import com.weibo.sdk.android.Weibo;
-import com.weibo.sdk.android.WeiboAuthListener;
-import com.weibo.sdk.android.WeiboDialogError;
-import com.weibo.sdk.android.WeiboException;
-import com.weibo.sdk.android.sso.SsoHandler;
+
 
 import android.app.Activity;
 import android.content.Context;
@@ -31,7 +26,7 @@ import android.widget.Toast;
 
 public class SinaWeiboHandler
 {
-	public static final String TAG = "SinaWeiboHandler";
+	/*public static final String TAG = "SinaWeiboHandler";
 	private Activity activity;
 	private Oauth2AccessToken accessToken;
 	private SsoHandler ssoHandler;
@@ -109,7 +104,7 @@ public class SinaWeiboHandler
 	                    .show();
 	        }
 
-	    }
+	    }*/
 	
 	
 }

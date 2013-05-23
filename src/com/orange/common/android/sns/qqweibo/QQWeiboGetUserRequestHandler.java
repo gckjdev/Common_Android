@@ -21,7 +21,8 @@ public class QQWeiboGetUserRequestHandler extends CommonSNSRequestHandler {
 
 	@Override
 	public String getBaseURL() {
-		return QQWeiboSNSRequest.QQ_USER_INFO_URL;
+		//return QQWeiboSNSRequest.QQ_USER_INFO_URL;
+		return "";
 	}
 
 	@Override

@@ -31,7 +31,7 @@ import android.util.Log;
 
 public class QQWeiboApi
 {
-	private static final String TAG = "QQWeiboApi";
+	/*private static final String TAG = "QQWeiboApi";
 	private OAuthV2 oAuthV2;
 	private Activity activity;
 	private QQOauth2AccessToken token;
@@ -74,7 +74,7 @@ public class QQWeiboApi
 	}
 	
 	
-	/*image url must be local path or tencent url*/
+	image url must be local path or tencent url
 	public void sendWeiBo(final String content,final String imageUrl,final QQRequestListener listener)
 	{
 		executorService.execute(new Runnable()
@@ -128,5 +128,5 @@ public class QQWeiboApi
 		}
 		
 		return result;
-	}
+	}*/
 }
